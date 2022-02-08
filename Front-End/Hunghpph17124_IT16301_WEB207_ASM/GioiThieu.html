@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="Trangchucss.css">
+    <script src="https://kit.fontawesome.com/f10839dc0c.js" crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+
+<body>
+    <div class="">
+
+        <nav class="navbar navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="Image/logo.e9737f2bfb0c.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><button type="button"
+                                class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Đăng nhập
+                            </button></h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link"  href="TrangChu.html">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="GioiThieu.html">Giới thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="LienHe.html">Liên hệ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="GopY.html">Góp ý</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="HoiDap.html">Hỏi đáp</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="KhoaHoc.html">Danh mục khóa học</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="carouselExampleIndicators" class="carousel slide " data-bs-ride="carousel" style="margin-top:70px">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="Image/banner1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="Image/banner2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="Image/banner3.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- modal-login -->
+        <!-- Button trigger modal -->
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg modal-fullscreen-sm-down">
+                <div class="modal-content">
+                    <div class="containe" id="main">
+                        <div class="sign-up">
+                            <form action="#">
+                                <h1>Create Account</h1>
+                                <div class="social-containe">
+                                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                                <p>or use your email for registration</p>
+                                <input type="text" placeholder="Name" required="">
+                                <input type="email" placeholder="Email" required="">
+                                <input type="password" placeholder="Password">
+                                <button type="button">Sign Up</button>
+                            </form>
+                        </div>
+                        <div class="sign-in">
+                            <form action="#">
+                                <h1>Sign in</h1>
+                                <div class="social-containe">
+                                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                                <p>or use your account</p>
+                                <input type="email" name="email" placeholder="Email" required="">
+                                <input type="password" name="pswd" placeholder="Password" required="">
+                                <a href="#">Forget your Password?</a>
+                                <a href="TrangChu2.html"><button type="button">Sign In</button></a>
+                            </form>
+                        </div>
+                        <div class="overlay-containe">
+                            <div class="overlay">
+                                <div class="overlay-left">
+                                    <h1>Wellcome Back!</h1>
+                                    <p>To keep connected with us please login with your personal info</p>
+                                    <button id="signIn" type="button">Sign In</button>
+                                </div>
+                                <div class="overlay-right">
+                                    <h1>Hello, Friend</h1>
+                                    <p>Enter your personal details and start journey with us</p>
+                                    <button id="signUp" type="submit" class="btn">Sign Up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Section: Contact v.2-->
+
+        <!--Section: Contact v.2-->
+
+
+        <div class="entry-content" style="margin-left: 32px;">
+            <h1 style="color: #993300;">Giới Thiệu Chung</h1>
+            <p>Tập đoàn FPT thành lập ngày 13/09/1988, hiện là tập đoàn công nghệ thông tin và viễn thông số 1 của Việt
+                Nam. Tập đoàn FPT hiện nay có tới 83 đơn vị thành viên với hàng trăm đơn vị kinh doanh và các bộ phận hỗ
+                trợ. Tập đoàn FPT có trụ sở tại 6 quốc gia: Nhật, Mỹ, Pháp, Úc, Singapore và Malaysia. Năm 2008, bất
+                chấp khủng hoảng tài chính, toàn tập đoàn đã đạt doanh số hơn 1 tỷ USD, trở thành doanh nghiệp tư nhân
+                đầu tiên của Việt Nam đạt ngưỡng này. FPT hiện là đối tác của hơn 200 tập đoàn công nghệ lớn nhất trên
+                toàn cầu. Bên cạnh đó, FPT cũng đang sở hữu trên 1.000 chứng chỉ công nghệ cấp quốc tế của các đối tác
+                công nghệ hàng đầu thế giới.</p>
+            <p>Đặc biệt, trong chuyến tháp tùng Chủ tịch nước Nguyễn Minh Triết sang Mỹ năm 2007, TGĐ Trương Gia Bình và
+                đoàn đại biểu FPT đã đạt được một bước ngoặt trong quan hệ đối tác chiến lược với Microsoft. Theo đó,
+                các Lập trình viên của FPT được tham gia viết các phần mềm cốt lõi của Microsoft cũng như có được sự hỗ
+                trợ của Microsoft trong việc xây dựng Đại học FPT trở thành “Ngôi trường của thế kỷ 21”.</p>
+            <p>Ngay từ năm 1999, nhận thấy nhu cầu nguồn nhân lực chất lượng cao là yếu tố sống còn của việc phát triển
+                Tập đoàn và ngành công nghiệp công nghệ thông tin, FPT đã phối hợp với tập đoàn đào tạo công nghệ thông
+                tin hàng đầu thế giới Aptech Ấn Độ triển khai hệ thống các trung tâm đào tạo Lập trình viên Quốc tế
+                Aptech và Mỹ thuật đa phương tiện Arena tại Việt Nam. Qua 10 năm hoạt động, hệ thống hiện đã có gần 40
+                trung tâm trên toàn quốc và đã đào tạo cho ngành công nghệ thông tin của Việt Nam trên 20.000 chuyên gia
+                phần mềm và mỹ thuật đa phương tiện.</p>
+
+            <p>Ngày 08/09/2006, Chính phủ đã có Quyết định số 208/2006/QĐ-TTg cho phép chính thức thành lập Trường Đại
+                học Tư thục FPT.</p>
+            <p>Sứ mệnh của Trường Đại học FPT là xây dựng mô hình của một trường Đại học thế hệ mới, có triết lý giáo
+                dục hiện đại, gắn liền đào tạo với thực tiễn cuộc sống và nhu cầu nhân lực của đất nước, góp phần đưa
+                ngành công nghệ thông tin Việt nam lên ngang tầm các nước tiên tiến trên thế giới.</p>
+            <p>Mục tiêu trước mắt của Trường Đại học FPT là đào tạo và cung cấp nguồn nhân lực chất lượng cao chuyên
+                ngành công nghệ thông tin và các nhóm ngành khác có liên quan cho tập đoàn FPT cũng như cho các tập đoàn
+                công nghệ thông tin toàn cầu tại khắp nơi trên thế giới và các doanh nghiệp Việt Nam.</p>
+            <p>Sự khác biệt của Trường Đại học FPT so với các trường đại học khác là đào tạo kỹ sư công nghiệp, nghĩa là
+                đào tạo theo hình thức liên kết chặt chẽ với các doanh nghiệp công nghệ thông tin, gắn đào tạo với thực
+                tiễn, với nghiên cứu – triển khai và các công nghệ hiện đại nhất. Triết lý và phương pháp giáo dục hiện
+                đại; đào tạo con người toàn diện, hài hòa; chương trình luôn được cập nhật và tuân thủ các chuẩn công
+                nghệ quốc tế; đặc biệt chú trọng kỹ năng ngoại ngữ; tăng cường đào tạo quy trình tổ chức sản xuất, kỹ
+                năng làm việc theo nhóm và các kỹ năng cá nhân khác là những điểm sẽ đảm bảo cho sinh viên tốt nghiệp có
+                những cơ hội việc làm tốt nhất tại tập đoàn FPT và các doanh nghiệp hàng đầu khác.</p>
+            <p><strong><span style="color: #993300;">Vài nét về FPT Polytechnic</span></strong></p>
+            <p>Hệ Cao đẳng thực hành thuộc Đại học FPT, còn gọi là FPT Polytechnic, được thực hiện đào tạo và cấp bằng
+                Cao đẳng nghề theo Quyết định của Tổng cục dạy nghề bắt đầu từ ngày 01/07/2010. Trường hướng tới mục
+                tiêu cung cấp kỹ năng nghề nghiệp chất lượng cao cho người học, đảm bảo được tính cạnh tranh trong môi
+                trường phát triển ngày càng cao.</p>
+            <p>Với nhận định nền kinh tế Việt Nam đang phát triển mạnh mẽ trong đó có sự đóng góp to lớn từ trên 500.000
+                doanh nghiệp vừa và nhỏ với từ 10 đến 200 nhân viên. FPT Polytechnic nhắm tới mục tiêu cung cấp nguồn
+                nhân lực được đào tạo tốt cho nhu cầu phát triển của không chỉ các doanh nghiệp lớn mà còn cho các doanh
+                nghiệp này.</p>
+            <p>Hướng tới người học chung trên toàn Việt Nam, chương trình cao đẳng thực hành của trường được thiết kế
+                dựa trên những kỹ năng thiết yếu nhất để làm việc và tương thích với các hệ thống đào tạo tiên tiến trên
+                thế giới.</p>
+            <p></p>
+
+
+
+
+
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+        </script>
+        <script type="text/javascript">
+            const signUpButton = document.getElementById('signUp');
+            const signInButton = document.getElementById('signIn');
+            const main = document.getElementById('main');
+
+            signUpButton.addEventListener('click', () => {
+                main.classList.add("right-panel-active");
+            });
+            signInButton.addEventListener('click', () => {
+                main.classList.remove("right-panel-active");
+            });
+        </script>
+</body>
+
+</html>
