@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+
+<body ng-app="myapp">
+    <form>
+        <div class = "container">
+            <div ng-controller="mycrtl1">
+                <div class="form-group">
+                    <label>Họ và tên:</label>
+                    <input ng-model="student.fullname" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Ngày sinh:</label>
+                    <input ng-model="student.birthday" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Điểm: </label>
+                    <input ng-model="student.mark" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-default" ng-click="save () ">Lưu</button>
+                    <button class="btn btn-default" ng-click="cancel() ">Hủy</button>
+                </div>
+            </div>
+            <div ng-controller="mycrtl2">
+                <!-- create table show student[0] and student[1] -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Họ và tên</th>
+                            <th>Ngày sinh</th>
+                            <th>Điểm</th>
+                            <th>Chức năng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{students[0].fullname}}</td>
+                            <td>{{students[0].birthday}}</td>
+                            <td>{{students[0].mark}}</td>
+                            <td>
+                                <a href="#" ng-click="edit(0)">Sửa</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{students[1].fullname}}</td>
+                            <td>{{students[1].birthday}}</td>
+                            <td>{{students[1].mark}}</td>
+                            <td>
+                                <a href="#" ng-click="edit(1)">Sửa</a>
+                            </td>
+                        </tr>
+                    </tbody>
+            </div>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        // create function a students array consisting of 2 student objects and a method edit() method with angularjs
+        var app = angular.module('myapp', []);
+        app.controller('mycrtl1', function ($scope, $rootScope) {
+            $scope.save = function () {
+                $rootScope.students[$rootScope.index] = $scope.student;
+               
+            }
+            $scope.cancel = function () {
+                $rootScope.student = angular.copy($rootScope.students[$rootScope.index]);
+            }
+
+        });
+        app.controller('mycrtl2', function ($scope , $rootScope) {
+            $rootScope.students = [{
+                    fullname: 'Nguyễn Hữu Phước',
+                    birthday: '30/10/1999',
+                    mark: '8.5'
+                },
+                {
+                    fullname: 'Nguyễn Hữu Lộc',
+                    birthday: '30/01/1999',
+                    mark: '10'
+                }
+            ];
+            
+            $scope.edit = function(index){
+                $rootScope.index = index;
+                $rootScope.student = angular.copy($rootScope.students[index]);
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body ng-app="demo_directive">
+    <div ng-controller="my_controller">
+        <ul>
+            <li>{{sv.name}}</li>
+            <li>
+                Giới tính:
+                <span ng-if="sv.gender == 1">Nam</span>
+                <span ng-if="sv.gender == 0">Nữ</span>
+            </li>
+            <li>
+                <span ng-hide="sv.mark <=0">Bạn chưa học môn này</span>
+                <span ng-show="sv.mark >=5">Bạn đã qua môn này</span>
+                <span ng-show="sv.mark >0 && sv.mark <5">Bạn chưa qua môn này</span>
+            </li>
+            <li ng-switch="sv.majors">
+                Chuyên ngành 
+                <span ng-switch-when="UDPM">Ứng dụng phần mềm</span>
+                <span ng-switch-when="TKTW">Thiết kế trang web</span>
+                <span ng-switch-when="LTMT">Lập trình máy tính</span>
+                <span ng-switch-when>Không hợp lệ</span>
+            </li>
+            <li>
+                Các môn đã Học
+                <ul>
+                    <li ng-repeat="studied in sv.studied">{{$index}}-{{studied}}</li>
+                </ul>
+            </li>
+            <li>
+                <!-- show all sv[]-->
+                <ul>
+                    <li ng-repeat="(key, value) in sv">{{key}}: {{value}}</li>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        const app = angular.module("demo_directive", []);
+        function myController($scope) {
+            $scope.sv = {
+                name: "Nguyễn Văn A",
+                gender: 0,
+                mark: 1,
+                majors: "UDPM",
+                studied: [
+                    "Nhập môn lập trình",
+                    "Java1",
+                    "java 2",
+                    "java 3",
+            ]
+            };
+
+        }
+        app.controller("my_controller", myController);
+    </script>
+</body>
+</html>

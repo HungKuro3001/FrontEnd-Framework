@@ -8,7 +8,6 @@
 </head>
 <body ng-app="Hello_World_App">
     <div ng-controller="Hello_WorldController">
-        <!-- create table show information people[0]-->
         <table class="table">
             <thead>
                 <tr>
@@ -24,13 +23,30 @@
                     <td><img src="{{people[0].picture}}" alt=""></td>
                     <td>{{ people[0].name }}</td>
                     <td>{{ people[0].birthday }}</td>
-                    <td>{{ people[0].
-        
+                    <td>{{ people[0].gender }}</td>
+                    <td>{{ people[0].mark }}</td>
+                </tr>
+                <tr>
+                    <td><img src="{{people[1].picture}}" alt=""></td>
+                    <td>{{ people[1].name }}</td>
+                    <td>{{ people[1].birthday }}</td>
+                    <td>{{ people[1].gender }}</td>
+                    <td>{{ people[1].mark }}</td>
+                </tr>
+                <tr>
+                    <td><img src="{{people[2].picture}}" alt=""></td>
+                    <td>{{ people[2].name }}</td>
+                    <td>{{ people[2].birthday }}</td>
+                    <td>{{ people[2].gender }}</td>
+                    <td>{{ people[2].mark }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script>
+        // create  array information people with angularjs
         const app = angular.module("Hello_World_App", []);
         function sayHello($scope) {
             $scope.people = [
@@ -60,14 +76,7 @@
             ];
         }
         app.controller("Hello_WorldController", sayHello);
-
-           
-
-
-
         
-
- 
     </script>
 </body>
 </html>

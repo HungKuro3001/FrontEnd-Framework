@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+
+<body ng-app="demo_scope_2">
+    <!-- Parent -->
+    <div ng-controller="parent_controller">
+        <p>Parent: {{ msg_parent }}</p>
+
+        <!-- Child 1 -->
+        <div ng-controller="my_controller1" style="height: 100px; background-color: aqua;">
+            <p>Child 1: {{ msg_1 }}</p>
+
+            <!--
+                    C1: truy xuất trực tiếp thuộc tính của $scope cha
+                        do vẫn thuộc phạm vi của $scope cha.
+                    => Xét trên $scope của parent_controller
+                -->
+            <p>Parent C1: {{ msg_parent }}</p>
+
+            <!--
+                    C2: Xét trên $scope của my_controller1 (child)
+                    Sử dụng $parent để truy xuất tới $scope cha
+                -->
+            <p>Parent C2: {{ $parent.msg_parent }}</p>
+        </div>
+
+        <!-- Child 2 -->
+        <div ng-controller="my_controller2" style="height: 100px; background-color: lightgreen;">
+            <p>Child 2: {{ msg_2 }}</p>
+        </div>
+    </div>
+
+    
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        const app = angular.module("demo_scope_2", []);
+
+        function parentController($scope) {
+            $scope.msg_parent = "Đây là message parent";
+        }
+
+        function myController1($scope) {
+            $scope.msg_1 = "Đây là message 1";
+        }
+
+        function myController2($scope) {
+            $scope.msg_2 = "Đây là message 2";
+            $rootScope.msg_root = "Đây là message root";
+        }
+
+        app.controller("parent_controller", parentController);
+        app.controller("my_controller1", myController1);
+        app.controller("my_controller2", myController2);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <div class="row">
+            <div class="col-md-3 col-12" ng-repeat="p in products">
+                <div class="card border-success mb-3" style="max-width: 18rem;">
+                    <div class="card-header bg-primary border-success text-center text-white " >{{p.name}}</div>
+                    <div class="card-body" width = "400px">
+                      <img src="anh/{{p.image}}" alt="" width ="100%" height="auto" justify="center">
+                    </div>
+                    <div class="card-footer bg-secondary border-success text-center">${{p.price}}</div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        const app = angular.module("myapp", []);
+        app.controller("myctrl", function ($scope) {
+            $scope.products = [{
+                name: "Iphone",
+                price: "200",
+                image: "anh1.jpg"
+            }, {
+                name: "Samsung",
+                price: "300",
+                image: "anh2.jpg"
+            }, {
+                name: "Oppo",
+                price: "400",
+                image: "anh3.jpg"
+            }, {
+                name: "Vivo",
+                price: "500",
+                image: "anh4.jpg"
+            }, {
+                name: "Xiaomi",
+                price: "600",
+                image: "anh5.jpg"
+            }, {
+                name: "Nokia",
+                price: "700",
+                image: "anh6.jpg"
+            }, {
+                name: "Sony",
+                price: "800",
+                image: "anh7.jpg"
+            }, {
+                name: "LG",
+                price: "900",
+                image: "anh8.jpg"
+
+            }];
+        });
+    </script>
+</body>
+
+</html>
