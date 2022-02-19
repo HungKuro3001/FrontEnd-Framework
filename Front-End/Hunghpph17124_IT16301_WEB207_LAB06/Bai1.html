@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+
+<body >
+    <div class="container" ng-app="myApp" ng-controller="myctrl">
+        <div class="card ">
+            <div class="card-header">
+                TÍNH THƯỞNG TẾT NGUYÊN ĐÁN
+            </div>
+            <form class="card-body">
+                <div class="form-group">
+                    <label for="">Họ và Tên</label>
+                    <input class="form-control" type="text" placeholder="Nhập họ và tên" ng-model="fullname">
+                </div>
+                <div class="form-group">
+                    <label for="">Lương</label>
+                    <input class="form-control" type="text" placeholder="Nhập lương" ng-model="salary">
+                </div>
+                <div class="form-group">
+                    <label for="">Giới tính</label>
+                    <div class="radio">
+                        <label for=""><input type="radio" ng-model="gender" value="NAM">NAM</label>
+                        <label for=""><input type="radio" ng-model="gender" value="NU">Nữ</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Độ tuổi</label>
+                    <select class="form-control" ng-model="age" ng-options="x.age for x in ages"></select>
+                </div>
+            </form>
+            <div class="card-footer">
+                TIỀN THƯỞNG:<strong>{{getBonus()|number:2}}</strong>VNĐ
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        const app = angular.module("myApp", []);
+        app.controller("myctrl", function ($scope) {
+            $scope.getBonus = function () {
+                $scope.ages = [{
+                        age: "Dưới 25",
+                        rate: 0.07
+                    },
+                    {
+                        age: "Từ 25 đến 40",
+                        rate: 0.1
+                    },
+                    {
+                        age: "Trên 40",
+                        rate: 0.15
+                    }
+                ];
+                $scope.age = $scope.ages[1];
+                $scope.gender = "NAM";
+                $scope.getBonus = function () {
+                    var bonus = $scope.age.rate * $scope.salary;
+                    if ($scope.gender == "NU") {
+                        bonus += 200000;
+                    }
+                    return bonus;
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

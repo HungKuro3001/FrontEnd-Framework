@@ -80,7 +80,7 @@
                 $scope.index = -1;
             }
             $scope.insert = function () {
-                $scope.students.push(angular.copy($scope.student));
+                $scope.students.push($scope.student);
                 $scope.clear();
             }
             $scope.update = function () {

@@ -26,28 +26,26 @@
     }
 </style>
 
-<body ng-app="QLAC">
+<body ng-app="QLC">
     <div ng-controller="myFunc">
+
         <!-- create div alert-->
         <div class="alert {{isSuccess == true ? 'alert-success' : 'alert-danger'}}" ng-show="message.length != 0">
             {{message}}
         </div>
-        <form ng-submit="onSubmitForm($event)" action="" class="col-8 offset-2">
+        <form ng-submit="onAddA($event)" action="" class="col-8 offset-2">
             <div class="form-group mt-3">
-                <label for="">Họ tên:</label>
-                <input class="form-control" type="text" ng-model="account.name">
+                <label for="">Name Course</label>
+                <input class="form-control" type="text" ng-model="course.name">
             </div>
-            <div class="form-group mt-3">
-                <label for="">Mã SV</label>
-                <input class="form-control" type="text" ng-model="account.code">
+            <div class="form-group mb-3">
+                <label for="">picture</label>
+                <input type="file" class="form-control" id="inputGroupFile02">
             </div>
-            <div class="form-group mt-3">
-                <label for="">Chuyên ngành</label>
-                <input class="form-control" ng-model="account.chuyen_nganh">
-            </div>
+            
+            
             <div class="form-group mt-3">
                 <button class="btn btn-primary">Lưu</button>
-                <button type="reset" class="btn btn-default ml-3">Xóa form</button>
             </div>
         </form>
         <div class="col-8 offset-2">
@@ -56,26 +54,24 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Birthday</th>
-                        <th>Password</th>
+                        <th>Picture</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="ac in accounts">
-                        <td>{{ ac.id }}</td>
-                        <td>{{ ac.name }}</td>
-                        <td>{{ ac.email }}</td>
-                        <td>{{ ac.birthday }}</td>
-                        <td>{{ ac.password }}</td>
+                    <tr ng-repeat="cs in courses">
+                        <td>{{ cs.id }}</td>
+                        <td>{{ cs.name }}</td>
+                        <td>{{ cs.picture }}</td>
+                        
                         <td>
-                            <button class="btn btn-primary" ng-click="onUpdateStudent($index)" >Sửa</button>
+                            <button class="btn btn-primary" ng-click="onUpdateAccount($index)">Sửa</button>
                         </td>
                         <td>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_{{ac.id}}">Xóa</button>
+                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#modal_delete_{{ac.id}}">Xóa</button>
 
-                            <div class="modal fade" id="modal_delete_{{ac.id}}" tabindex="-1" aria-hidden="true">
+                            <div class="modal fade" id="modal_delete_{{cs.id}}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -89,7 +85,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng</button>
-                                            <button type="button" ng-click="onDeleteStudent(ac.id)" class="btn btn-danger">Xóa</button>
+                                            <button type="button" ng-click="onDeleteAccount(cs.id, $scope.index)"
+                                                class="btn btn-danger">Xóa</button>
                                         </div>
                                     </div>
                                 </div>
@@ -119,54 +116,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        var app = angular.module("QLAC", []);
+        var app = angular.module("QLC", []);
         app.controller("myFunc", function ($scope, $http) {
-             // Khởi tạo
-             $scope.accounts = [];
-             $scope.account = {
-                 id: '',
-                 name: '',
-                 email: '',
-                 birthday: '',
-                 password: ''
-             };
-             $scope.isSuccess = true;
-             $scope.message = "";
-            const api = 'https://620f09caec8b2ee283319ac1.mockapi.io/api/PH17124/Hung';
+            // Khởi tạo
+            $scope.courses = [];
+            $scope.course = {
+                id: '',
+                name: '',
+                img: '',
+            };
+            $scope.isSuccess = true;
+            $scope.message = "";
+
+            const api = 'https://620f09caec8b2ee283319ac1.mockapi.io/api/PH17124/Course';
             // gửi 1 request dạng GET lên API server
             $http.get(api).then(function (res) {
-                    $scope.accounts = res.data;
+                    $scope.courses = res.data;
                     console.log(res);
-                    
                 })
                 .catch(function (err) {
                     console.log(err);
-                   
                 });
-           
             
-            
-            
-            // create function delete student
-            $scope.onDeleteStudent = function (id) {
-                
-                $http.delete(api + '/' + id).then(function (res) {
-                        
-                        console.log("Xoá thành công");
-                        $scope.message = "Xóa thành công";
-                        $scope.isSuccess = true;
-                        // remove student from array
-                        $scope.accounts.splice(id, 1);
-                        $('#modal_delete_'+id).modal('hide');
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                        
-                        $scope.message = "Xóa thất bại";
-                        $scope.isSuccess = false;
-                    });
-            };
-           
+
 
         });
     </script>

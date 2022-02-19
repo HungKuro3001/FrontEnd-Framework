@@ -26,8 +26,12 @@
     }
 </style>
 
-<body ng-app="QLAC">
-    <div ng-controller="myFunc">
+<body ng-app="qlsv">
+    <div ng-controller="myctrl">
+        <div ng-show="isLoading" class="loading">
+            <div class="spinner-border text-primary spinner-center" role="status">
+            </div>
+        </div>
         <!-- create div alert-->
         <div class="alert {{isSuccess == true ? 'alert-success' : 'alert-danger'}}" ng-show="message.length != 0">
             {{message}}
@@ -35,15 +39,15 @@
         <form ng-submit="onSubmitForm($event)" action="" class="col-8 offset-2">
             <div class="form-group mt-3">
                 <label for="">Họ tên:</label>
-                <input class="form-control" type="text" ng-model="account.name">
+                <input class="form-control" type="text" ng-model="student.name">
             </div>
             <div class="form-group mt-3">
                 <label for="">Mã SV</label>
-                <input class="form-control" type="text" ng-model="account.code">
+                <input class="form-control" type="text" ng-model="student.code">
             </div>
             <div class="form-group mt-3">
                 <label for="">Chuyên ngành</label>
-                <input class="form-control" ng-model="account.chuyen_nganh">
+                <input class="form-control" ng-model="student.chuyen_nganh">
             </div>
             <div class="form-group mt-3">
                 <button class="btn btn-primary">Lưu</button>
@@ -55,27 +59,25 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Birthday</th>
-                        <th>Password</th>
+                        <th>Họ tên</th>
+                        <th>Mã SV</th>
+                        <th>Chuyên ngành</th>
                         <th colspan="2">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="ac in accounts">
-                        <td>{{ ac.id }}</td>
-                        <td>{{ ac.name }}</td>
-                        <td>{{ ac.email }}</td>
-                        <td>{{ ac.birthday }}</td>
-                        <td>{{ ac.password }}</td>
+                    <tr ng-repeat="sv in students">
+                        <td>{{ sv.id }}</td>
+                        <td>{{ sv.name }}</td>
+                        <td>{{ sv.code }}</td>
+                        <td>{{ sv.chuyen_nganh }}</td>
                         <td>
                             <button class="btn btn-primary" ng-click="onUpdateStudent($index)" >Sửa</button>
                         </td>
                         <td>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_{{ac.id}}">Xóa</button>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_{{sv.id}}">Xóa</button>
 
-                            <div class="modal fade" id="modal_delete_{{ac.id}}" tabindex="-1" aria-hidden="true">
+                            <div class="modal fade" id="modal_delete_{{sv.id}}" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -89,7 +91,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng</button>
-                                            <button type="button" ng-click="onDeleteStudent(ac.id)" class="btn btn-danger">Xóa</button>
+                                            <button type="button" ng-click="onDeleteStudent(sv.id, $scope.index)" class="btn btn-danger">Xóa</button>
                                         </div>
                                     </div>
                                 </div>
@@ -119,54 +121,100 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        var app = angular.module("QLAC", []);
-        app.controller("myFunc", function ($scope, $http) {
-             // Khởi tạo
-             $scope.accounts = [];
-             $scope.account = {
-                 id: '',
-                 name: '',
-                 email: '',
-                 birthday: '',
-                 password: ''
-             };
-             $scope.isSuccess = true;
-             $scope.message = "";
-            const api = 'https://620f09caec8b2ee283319ac1.mockapi.io/api/PH17124/Hung';
+        var app = angular.module("qlsv", []);
+        app.controller("myctrl", function ($scope, $http) {
+            // Khởi tạo
+            $scope.students = [];
+            $scope.student = {
+                id: "",
+                name: "",
+                code: "",
+                chuyen_nganh: "",
+            };
+            $scope.isSuccess = true;
+            $scope.message = "";
+            $scope.isLoading = true;
+            const api = 'https://620b061fbeee430017f38481.mockapi.io/students';
             // gửi 1 request dạng GET lên API server
             $http.get(api).then(function (res) {
-                    $scope.accounts = res.data;
+                    $scope.students = res.data;
                     console.log(res);
-                    
+                    $scope.isLoading = false;
                 })
                 .catch(function (err) {
                     console.log(err);
-                   
+                    $scope.isLoading = false;
                 });
-           
-            
+            $scope.onSubmitForm = function (event) {
+                event.preventDefault();
+                $scope.isLoading = true;
+                $http.post(api, $scope.student).then(function (res) {
+                        
+                        $scope.isLoading = false;
+                        // create message congratulation
+                        //alert("Thêm thành công");
+                        $scope.message = "Thêm thành công";
+                        $scope.isSuccess = true;
+                        $scope.students.push(res.data); 
+                        
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        $scope.isLoading = false;
+                        $scope.message = "Thêm thất bại";
+                        $scope.isSuccess = false;
+                    });
+            };
+            // create function update student with http put
+            $scope.onUpdateStudent = function (index) {
+                $scope.isLoading = true;
+                $scope.student = $scope.students[index];
+                $scope.index = index;
+                $http.put(api + '/' + $scope.student.id, $scope.student).then(function (res) {
+                        $scope.isLoading = false;
+                        $scope.message = "Cập nhật thành công";
+                        $scope.isSuccess = true;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        $scope.isLoading = false;
+                        $scope.message = "Cập nhật thất bại";
+                        $scope.isSuccess = false;
+                    });
+            };
             
             
             // create function delete student
-            $scope.onDeleteStudent = function (id) {
-                
+            $scope.onDeleteStudent = function (id, index) {
+                $scope.isLoading = true;
                 $http.delete(api + '/' + id).then(function (res) {
-                        
+                        $scope.isLoading = false;
                         console.log("Xoá thành công");
                         $scope.message = "Xóa thành công";
                         $scope.isSuccess = true;
                         // remove student from array
-                        $scope.accounts.splice(id, 1);
+                        $scope.students.splice(index, 1);
                         $('#modal_delete_'+id).modal('hide');
                     })
                     .catch(function (err) {
                         console.log(err);
-                        
+                        $scope.isLoading = false;
                         $scope.message = "Xóa thất bại";
                         $scope.isSuccess = false;
                     });
             };
-           
+            // create function pagination
+            $scope.onPagination = function (page) {
+                $scope.isLoading = true;
+                $http.get(api + '?page=' + page).then(function (res) {
+                        $scope.students = res.data;
+                        $scope.isLoading = false;
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        $scope.isLoading = false;
+                    });
+            };
 
         });
     </script>
