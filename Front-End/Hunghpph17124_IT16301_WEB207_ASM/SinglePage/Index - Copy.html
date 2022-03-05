@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .containe {
+        position: relative;
+        width: 796px;
+        max-width: 100%;
+        min-height: 480px;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22)
+    }
+
+    .sign-up,
+    .sign-in {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+    }
+
+    .sign-up {
+        width: 50%;
+        opacity: 0;
+        z-index: 1
+    }
+
+    .sign-in {
+        width: 50%;
+        z-index: 2;
+    }
+
+    form {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 50px;
+        height: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 100;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        margin: 15px 0 20px;
+    }
+
+    input {
+        background: #eee;
+        padding: 12px 15px;
+        margin: 8px 15px;
+        width: 100%;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+
+    a {
+        color: #333;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 15px 0;
+    }
+
+    button {
+        color: #fff;
+        background: #ff4b2b;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 12px 55px;
+        margin: 20px;
+        border-radius: 20px;
+        border: 1px solid #ff4b2b;
+        outline: none;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: transform 80ms ease-in;
+        cursor: pointer;
+    }
+
+    button:active {
+        transform: scale(0.90);
+    }
+
+    #signIn,
+    #signUp {
+        background-color: transparent;
+        border: 2px solid #fff;
+    }
+
+    .containe.right-panel-active .sign-in {
+        transform: translateX(100%);
+    }
+
+    .containe.right-panel-active .sign-up {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+        animation: show 0.6s;
+    }
+
+    @keyframes show {
+
+        0%,
+        49.99% {
+            opacity: 0;
+            z-index: 1;
+        }
+
+        50%,
+        100% {
+            opacity: 1;
+            z-index: 5;
+        }
+    }
+
+    .overlay-containe {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+    }
+
+    .containe.right-panel-active .overlay-containe {
+        transform: translateX(-100%);
+    }
+
+    .overlay {
+        position: relative;
+        color: #fff;
+        background: #ff416c;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        background: linear-gradient(to right, #ff4b28, #e6b54e);
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .containe.right-panel-active .overlay {
+        transform: translateX(50%);
+    }
+
+    .overlay-left,
+    .overlay-right {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 40px;
+        text-align: center;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-left {
+        transform: translateX(-20%);
+    }
+
+    .overlay-right {
+        right: 0;
+        transform: translateX(0);
+    }
+
+    .containe.right-panel-active .overlay-left {
+        transform: translateX(0);
+    }
+
+    .containe.right-panel-active .overlay-right {
+        transform: translateX(20%);
+    }
+
+    .social-containe {
+        margin: 20px 0;
+    }
+
+    .social-containe a {
+        height: 40px;
+        width: 40px;
+        margin: 0 5px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+    }
+</style>
+
+<body ng-app="Home">
+    <div class="container-fluid" style="background-color: rgb(205, 228, 247);" >
+
+        <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand active" aria-current="page" href="#Home" active target="index">
+                    <h4 class="ms-3" style="font-size: 25px;">FPT Polytechnic</h4>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark ms-3" href="#GioiThieu">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark ms-3" href="#LienHe">Liên hệ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark ms-3" href="#GopY">Góp ý</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark ms-3" href="#HoiDap">Hỏi đáp</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex me-5">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark ms-3" href="#" id="navbarDropdown"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tài khoản
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="" data-bs-toggle="modal"
+                                        data-bs-target="#dangki">Đăng ký</a></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#dangnhap" ng-hide="$parent.isLogin">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="" data-bs-toggle="modal"
+                                        data-bs-target="#quenmatkhau" >Quên mật khẩu</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="#Home" ng-click="logout()">Đăng xuất</a></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#doimatkhau" ng-hide="!$parent.isLogin">Đổi mật khẩu</a></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#capnhat" ng-hide="!$parent.isLogin">Cập nhật tài khoản</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="row mt-5"></div>
+        <div class="row mt-4">
+            <img src="banner/banner.png" class="img-fluid" alt="">
+        </div>
+        <div class="row mt-4">
+            <article class="col-9 col-sm-9 col-md-9" ng-view>
+                <div class="row">
+                    <div class=" col-sm-12 col-md-6 mb-3">
+                        <div class="card">
+                            <div class="row card-body">
+                                <div class="col-5 col-sm-5  col-md-5">
+                                    <img src="./Image/ADAV.jpg" class="card-img-top" alt="">
+                                </div>
+                                <div class="col-7 col-sm-7  col-md-7">
+                                    <ul style="list-style: none;">
+                                        <li>
+                                            <h5> Lập trình Android nâng cao </h5>
+                                        </li>
+                                        <li>
+                                            <p>Test online</p>
+                                        </li>
+                                        <li>
+                                            <a class="btn btn-primary" href="Tracnghiem.html">
+                                                <h5>Làm bài</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="card">
+                            <div class="row card-body">
+                                <div class="col-5 col-sm-5  col-md-5">
+                                    <img src="./Image/JABS.png" class="card-img-top" alt="">
+                                </div>
+                                <div class="col-7 col-sm-7  col-md-7">
+                                    <ul style="list-style: none;">
+                                        <li>
+                                            <h5> Lập trình Java cơ bản </h5>
+                                        </li>
+                                        <li>
+                                            <p>Test online</p>
+                                        </li>
+                                        <li>
+                                            <a class="btn btn-primary">
+                                                <h5>Làm bài</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="card">
+                            <div class="row card-body">
+                                <div class="col-5 col-sm-5  col-md-5">
+                                    <img src="./Image/DBBS.png" class="card-img-top" alt="">
+                                </div>
+                                <div class="col-7 col-sm-7  col-md-7">
+                                    <ul style="list-style: none;">
+                                        <li>
+                                            <h5> SQL Server</h5>
+                                        </li>
+                                        <li>
+                                            <p>Test online</p>
+                                        </li>
+                                        <li>
+                                            <a class="btn btn-primary ">
+                                                <h5>Làm bài</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="card">
+                            <div class="row card-body">
+                                <div class="col-5 col-sm-5  col-md-5">
+                                    <img src="./Image/HTCS.jpg" class="card-img-top" alt="">
+                                </div>
+                                <div class="col-7 col-sm-7  col-md-7">
+                                    <ul style="list-style: none;">
+                                        <li>
+                                            <h5> Xây dựng trang web</h5>
+                                        </li>
+                                        <li>
+                                            <p>Test online</p>
+                                        </li>
+                                        <li>
+                                            <a class="btn btn-primary ">
+                                                <h5>Làm bài</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-sm-12 col-md-6 mb-3">
+                        <div class="card">
+                            <div class="row card-body">
+                                <div class="col-5 col-sm-5  col-md-5">
+                                    <img src="./Image/JABS.png" class="card-img-top" alt="">
+                                </div>
+                                <div class="col-7 col-sm-7  col-md-7">
+                                    <ul style="list-style: none;">
+                                        <li>
+                                            <h5> Lập trình Java cơ bản</h5>
+                                        </li>
+                                        <li>
+                                            <p>Test online</p>
+                                        </li>
+                                        <li>
+                                            <a class="btn btn-primary ">
+                                                <h5>Làm bài</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="card">
+                            <div class="row card-body">
+                                <div class="col-5 col-sm-5  col-md-5">
+                                    <img src="./Image/PHPP.png" class="card-img-top" alt="">
+                                </div>
+                                <div class="col-7 col-sm-7  col-md-7">
+                                    <ul style="list-style: none;">
+                                        <li>
+                                            <h5> Lập trình PHP</h5>
+                                        </li>
+                                        <li>
+                                            <p>Test online</p>
+                                        </li>
+                                        <li>
+                                            <a class="btn btn-primary ">
+                                                <h5>Làm bài</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-4 col-sm-4 col-md-4"></div>
+                    <div class="col-8 col-sm-8  col-md-8">
+                        <ul class="pagination">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="col-3 col-sm-3 col-md-3">
+                <div class="card">
+                    <div class="card-header bg-dark">
+                        <strong style="margin-top: 10px;color: white;">
+
+                            <!-- <button class="btn btn-dark" data-bs-toggle="collapse" data-bs-target="#danhmuc" ng-disabled="!islambai">
+                                <span class="bi-list"></span>
+                                DANH MỤC </button> -->
+                        </strong>
+
+                    </div>
+
+                    <div id="danhmuc" class="collapse">
+                        <ul class="list-group" style="list-style: none;font-size: 17px;">
+                            <li><a class="list-group-item" href="#Quizz" ng-repeat="subject in subjects" ng-click="lamtest(lamtest.Id,subject.Name)" >{{subject.Name}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </aside>
+
+        </div>
+        <div id="dangnhap" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg " role="document">
+                <div class="modal-content">
+                    <div class="row modal-body" style="background-color: rgb(205, 228, 247);">
+                        <div class="col-md-6">
+
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeG8a50tAO0uMPzGNPWVCC0fSSyKiRXmlXpw&usqp=CAU"
+                                width="350px" height="300px" alt="">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <h3 class="col-md-11 modal-title text-center fw-bold">Đăng nhập</h3>
+                                <button type="button" class="btn-close col-md-1 mt-2" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form name="form_login">
+                                <div class="md-form">
+                                    <div>
+                                        <label for="fullname" class="fw-bold">UserName</label>
+                                        <input type="text" ng-model="student.username" class="form-control"
+                                            name="fullname" id="fullname" maxlength="25" required>
+                                    </div>
+                                    <span ng-show="form_login.fullname.$invalid && form_login.fullname.$touched"
+                                        class="text-danger">UserName không được để trống</span>
+
+                                </div>
+                                <div class="md-form mt-3">
+                                    <label for="mk" class="fw-bold mt-2">Password</label>
+                                    <input type="password" class="form-control" ng-model="student.password"
+                                        name="password" id="mk" required>
+                                    <span ng-show="form_login.password.$invalid && form_login.password.$touched"
+                                        class="text-danger">
+                                        Password không được để trống</span>
+
+                                </div>
+
+                                <div class="md-form mt-4">
+                                    <button class="col-md-12 btn btn-primary" ng-click="login()">Đăng nhập</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dangki" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Đăng Ký</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form ng-submit="resgister($event)" name="form" action="" class="col-8 offset-2">
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Họ tên:</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="text" name="fullname" ng-model="student1.fullname" required>
+                            </div>
+                            <span ng-show="form.fullname.$invalid && form.fullname.$touched" class="text-danger">Họ tên không để trống</span>
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Tên đăng nhập</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="text" name="username" ng-model="student1.username" required>
+                                
+                            </div>
+                            <span ng-show="form.username.$invalid && form.username.$touched" class="text-danger">Tên đăng nhập không để trống</span>
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Email</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="email" name="email" ng-model="student1.email" required>
+                            </div>
+                            <span ng-show="form.email.$error.required && form.email.$touched" class="text-danger">Email không để trống</span>
+                            <span ng-show="form.email.$error.email && form.email.$touched" class="text-danger">Email không đúng định dạng</span>
+                        
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Password</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="password" name="password" ng-model="student1.password" required>
+                            <span ng-show="form.password.$invalid && form.password.$touched" class="text-danger">Password không để trống</span>
+                                
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Birthday</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" name="birthday" ng-model="student1.birthday" required>
+                                
+                            </div>
+                            <span ng-show="form.birthday.$error.required && form.birthday.$touched" class="text-danger">Ngày sinh không để trống</span>
+                            <span ng-show="form.birthday.$error.pattern && form.birthday.$touched"class="text-danger">Ngày sinh không đúng định dạng</span>
+                            
+                            <div class="form-group mt-3">
+                            <div class="row ">
+                                <label for="" class="fw-bold" >Giới Tính</label>
+                                <div class="col-md-2">
+                                    <input  type="radio" ng-model="student1.gender" value="nam" checked>
+                                    <label for="">Nam</label>
+                                  </div>
+                                   <div class="col-md-2">
+                                    <input  type="radio" ng-model="student1.gender" value="nu">
+                                    <label for="">Nữ</label>
+                                   </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Học phí</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="number" name="schoolfee" ng-model="student1.schoolfee" required>
+                                
+                            </div>   
+                            <span ng-show="form.schoolfee.$invalid && form.schoolfee.$touched" class="text-danger">Học phí không để trống</span>
+                            
+                            </div>
+                            <div class="form-group mt-3 mb-5 text-center">
+                                <button class="btn btn-primary">Đăng ký</button>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="quenmatkhau" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content " style="background-color:  rgb(205, 228, 247);">
+                    <div class="modal-header ">
+                        <div class="row text-center">
+                            <h3 class="modal-title">Quên mật khẩu</h3>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body ">
+                        <form ng-submit="forgotpass($event)" name="form" action="" class="col-8 offset-2">
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">UserName</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="text" name="username" ng-model="student2.username" required>
+                        
+                            </div>
+                            <span ng-show="form.username.$invalid && form.username.$touched" class="text-danger">UserName không để trống</span>
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Email</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="email" name="email" ng-model="student2.email" required>
+                            </div>
+                            <span ng-show="form.email.$error.required && form.email.$touched" class="text-danger">Email không để trống</span>
+                            <span ng-show="form.email.$error.email && form.email.$touched" class="text-danger">Email không đúng định dạng</span>
+                        
+                        
+                            <div class="form-group mt-3 mb-5 text-center">
+                                <button class="btn btn-primary">Lấy mật khẩu</button>
+                        
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                </form>
+            </div>
+        </div>
+        <div id="doimatkhau" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content" style="background-color:  rgb(205, 228, 247);">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Đổi mật khẩu</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form ng-submit="changepassword($event)" name="form" action="" class="col-8 offset-2">
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Mật khẩu hiện tại</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="password" name="mkht" ng-model="mkht" required>
+
+                            </div>
+                            <span ng-show="form.mkht.$invalid && form.mkht.$touched" class="text-danger">Mật khẩu hiện
+                                tại không để trống</span>
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Mật khẩu mới</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="password" name="mkmoi" ng-model="mkmoi" required>
+
+                            </div>
+                            <span ng-show="form.mkmoi.$invalid && form.mkmoi.$touched" class="text-danger">Mật khẩu mới
+                                không để trống</span>
+
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Xác nhận mật khẩu mới</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="password" name="mkxn" ng-model="mkconfirm" required>
+
+                            </div>
+                            <span ng-show="form.mkxn.$invalid && form.mkxn.$touched" class="text-danger">Mật khẩu hiện
+                                tại không để trống</span>
+
+
+                            <div class="form-group mt-3 mb-5 text-center">
+                                <button class="btn btn-primary">Lấy mật khẩu</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="capnhat" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Cập nhật thông tin cá nhân</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form ng-submit="updateInformation($event)" name="form" action="" class="col-8 offset-2">
+                            <div class="form-group mt-2">
+                                <label for="" class="fw-bold">Họ tên</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="text" name="fullname" ng-model="student.fullname" required>
+
+                            </div>
+                            <span ng-show="form.fullname.$invalid && form.fullname.$touched" class="text-danger">Họ tên không để trống</span>
+                            <div class="form-group mt-3">
+                                <label for="" class="fw-bold">Email</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="email" name="email" ng-model="student.email" required>
+                            </div>
+                            <span ng-show="form.email.$error.required && form.email.$touched" class="text-danger">Email không để trống</span>
+                            <span ng-show="form.email.$error.email && form.email.$touched" class="text-danger">Email không đúng định dạng</span>
+                        
+                            <div class="md-form row">
+                             
+                                    <label for="tk" class="fw-bold mt-1">Giới tính <span class="text-danger">*</span></label>
+ 
+                                   <div class="row mt-3">
+                                    <div class="col-md-3">
+                                        <input  type="radio" ng-model="student.gender" value="nam" ng-checked="student.gender == 'nam'">
+                                        <label for="">Nam</label>
+                                      </div>
+                                       <div class="col-md-3">
+                                        <input  type="radio" ng-model="student.gender"ng-checked="student.gender == 'Nữ'" value="Nữ">
+                                        <label for="">Nữ</label>
+                                       </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group mt-3 mb-4">
+                                <label for="" class="fw-bold">Ngày sinh</label>
+                                <span class="text-danger">*</span>
+                                <input class="form-control" type="text" name="birthday" ng-model="student.birthday" required>
+                            </div>
+                            <span ng-show="form.birthday.$error.required && form.birthday.$touched" class="text-danger">Ngày sinh không để trống</span>
+                            <span ng-show="form.birthday.$error.pattern && form.birthday.$touched"class="text-danger">Ngày sinh không đúng định dạng</span>
+                        
+                            <div class="form-group text-center mb-3">
+                             <button class="btn btn-primary">Cập nhật</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js"></script>
+    <script src="controllers/homeConller.js"></script>
+    <script src="controllers/quizz.js"></script>
+    <script>
+        
+        const app = angular.module("Home", ['ngRoute']);
+        app.config(function ($routeProvider, $locationProvider) {
+            $locationProvider.hashPrefix('');
+            $routeProvider
+                .when("/Home", {
+                    templateUrl: 'Page/TrangChu.html',
+                    controller: ''
+                })
+                .when("/GioiThieu", {
+                    templateUrl: 'Page/GioiThieu.html',
+                   
+                })
+                .when("/GopY", {
+                    templateUrl: 'Page/GopY.html',
+                  
+                })
+                .when("/HoiDap", {
+                    templateUrl: 'Page/HoiDap.html',
+                 
+                })
+                .when("/LienHe", {
+                    templateUrl: 'Page/LienHe.html',
+                })
+                .when("/Quizz", {
+                    templateUrl: 'Tracnghiem.html',
+                    controller: 'quizzController'
+                })
+                .when("/KetQua", {
+                    templateUrl: 'diem.html',
+                })
+
+        });
+        app.controller('homeController',Home);
+        app.controller('quizzController',quizz);
+        app.controller('controller', function ($scope, $http, $rootScope) {
+            $rootScope.diem = 0;
+            $rootScope.student = {
+                username: '',
+                password: ''
+            };
+            $rootScope.students = [];
+            $rootScope.subjects = [];
+            $scope.$parent.isLogin = false;
+
+            $rootScope.getdata = function () {
+                $http.get("https://620f07cdec8b2ee283316154.mockapi.io/login").then(function (response) {
+                    console.log(response);
+                    $rootScope.students = response.data;
+                }).catch(function (error) {
+                    console.log(error)
+                });
+            };
+            $rootScope.getdata();
+            $scope.islambai = false;
+            $scope.login = function () {
+                if ($scope.$parent.isLogin == false) {
+                    for (var i = 0; i < $scope.students.length; i++) {
+                        if (    $rootScope.student.username == $rootScope.students[i].username &&  $rootScope.student.password == $rootScope.students[i].password) {
+                            $scope.$parent.isLogin = true;
+                            $rootScope.student = angular.copy($rootScope.students[i]);
+                            break;
+                        }
+                    }
+                    if ($scope.$parent.isLogin) {
+                        alert("Đăng nhập thành công");
+                        $("#dangnhap").modal('hide');
+                        $scope.islambai = true;
+                    } else {
+                        alert("Tài khoản hoặc mật khẩu không chính xác");
+
+                    }
+                } else {
+                    alert("Bạn đã đăng nhập");
+                }
+            };
+            $scope.logout = function () {
+                if ($scope.$parent.isLogin == false) {
+                    alert("Bạn chưa Đăng nhập");
+                } else {
+                    alert("Đăng xuất thành công");
+                    $scope.$parent.isLogin = false;
+                    $rootScope.student = {};
+                  
+                }
+            }
+            $scope.changepassword = function (event) {
+                event.preventDefault();
+                if ($scope.mkht != $rootScope.student.password) {
+                    alert("Mật khẩu hiện tại không chính xác");
+                    return;
+                } if ($scope.mkmoi != $scope.mkconfirm) {
+                    alert("Mật khẩu xác nhận không chính xác");
+                    return;
+                }
+                const updateapi = "https://620f07cdec8b2ee283316154.mockapi.io/login" + "/" +    $rootScope.student.ID;
+                $rootScope.student.password = $scope.mkmoi;
+                console.log
+                $http.put(updateapi, $scope.student).then(function (response) {
+                    console.log(response);
+                    alert("Đổi mật khẩu thành công");
+                    $scope.mkht = '';
+                    $scope.mkmoi = '';
+                    $scope.mkconfirm = '';
+                $rootScope.getdata();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+            $scope.updateInformation = function(event){
+                event.preventDefault();
+                const updateapi = "https://620f07cdec8b2ee283316154.mockapi.io/login" + "/" +    $rootScope.student.ID;
+                $http.put(updateapi,    $rootScope.student).then(function (response) {
+                    console.log(response);
+                    alert("Cập hật thông tin thành công");
+                    $rootScope.getdata();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+            }
+            $http.get("db/Subjects.js").then(function(response){
+                console.log(response.data);
+                $rootScope.subjects = response.data;
+            });
+            $scope.resgister = function (event) {
+                event.preventDefault();
+                console.log($scope.student1);
+                $http.post("https://620f07cdec8b2ee283316154.mockapi.io/login", $scope.student1).then(function (response) {
+                    console.log(response);
+                    alert("Bạn đã đăng ký thành công tài khoản có Username:" + $scope.student1.username);
+                    $rootScope.getdata();
+                });
+
+
+            };
+            $scope.forgotpass = function (event) {
+                event.preventDefault();
+                var check = false;
+                for (var i = 0; i < $rootScope.students.length; i++) {
+                    if ($scope.student2.username == $rootScope.students[i].username && $scope.student2.email == $rootScope.students[i].email) {
+                        alert("Mật khẩu của bạn là : " + $rootScope.students[i].password);
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check) {
+                    alert("Username hoặc email không chính xác");
+                }
+            }
+            $scope.lamtest = function(Id,name){
+                $rootScope.monhoc.ID = Id;
+                $rootScope.monhoc.name = name;
+            }
+            $scope.student.mark =  $rootScope.diem;
+        });
+    </script>
+</body>
+
+</html>

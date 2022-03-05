@@ -1,0 +1,24 @@
+<h2 class="text-center"> Quên mật khẩu</h2>
+<h2 class="text-center"> Đăng ký</h2>
+<form ng-submit="onFormsubmit($event)" name="form" action="" class="col-8 offset-2">
+    <div class="form-group mt-3">
+        <label for="" class="fw-bold">UserName</label>
+        <span class="text-danger">*</span>
+        <input class="form-control" type="text" name="username" ng-model="student2.username" required>
+
+    </div>
+    <span ng-show="form.username.$invalid && form.username.$touched" class="text-danger">UserName không để trống</span>
+    <div class="form-group mt-3">
+        <label for="" class="fw-bold">Email</label>
+        <span class="text-danger">*</span>
+        <input class="form-control" type="email" name="email" ng-model="student2.email" required>
+    </div>
+    <span ng-show="form.email.$error.required && form.email.$touched" class="text-danger">Email không để trống</span>
+    <span ng-show="form.email.$error.email && form.email.$touched" class="text-danger">Email không đúng định dạng</span>
+
+
+    <div class="form-group mt-3 mb-5 text-center">
+        <button class="btn btn-primary">Lấy mật khẩu</button>
+
+    </div>
+</form>

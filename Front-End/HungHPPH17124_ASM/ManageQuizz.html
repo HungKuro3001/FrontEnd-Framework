@@ -1,0 +1,104 @@
+<main class="mt-5 px-3 py-3 ">
+    <form action="" ng-submit="onFormSubmit($event)" class="col-12 px-3">
+        <div class="form-group mt-3">
+            <label for="">Answer</label>
+            <input class="form-control" type="text" ng-model="answer.Text">
+        </div>
+        <div class="form-group mt-3">
+            <label for="">Marks</label>
+            <input class="form-control" type="text" ng-model="answer.Marks">
+        </div>
+        <div class="form-group mt-3">
+            <label for="">AnswerId</label>
+            <input class="form-control" ng-model="answer.AnswerId">
+        </div>
+        <div class="form-group mt-3">
+            <label for="">Đáp án 1</label>
+            <input class="form-control" ng-model="answer.Answers[0]">
+        </div>
+        <div class="form-group mt-3">
+            <label for="">Đáp án 2</label>
+            <input class="form-control" ng-model="answer.Answers[1]">
+        </div>
+        <div class="form-group mt-3">
+            <label for="">Đáp án 3</label>
+            <input class="form-control" ng-model="answer.Answers[2]">
+        </div>
+        <div class="form-group mt-3">
+            <label for="">Đáp án 4</label>
+            <input class="form-control" ng-model="answer.Answers[3]">
+        </div>
+
+        <div class="form-group mt-3">
+            <button class="btn btn-primary" ng-click="insert()" ng-show="index == -1">Thêm</button>
+            <button class="btn btn-primary" ng-click="save()" ng-hide="index == -1">Sửa</button>
+            <!-- <button class="btn btn-primary" ng-click="cancel()">Hủy</button> -->
+            <!-- <button class="btn btn-primary" ng-click="delete()"  ng-hide="index == -1">Xóa</button> -->
+            <button class="btn btn-primary" ng-click="clear()">Làm mới</button>
+        </div>
+    </form>
+    <div class="row mt-5 ">
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    <span><i class="bi bi-table me-2"></i></span> Data Table
+                </div>
+                <div class="card-body" style="box-sizing: border-box;">
+                    <div style="width: 1200px;">
+                        <table id="example" class="table table-striped data-table" style="width: 100%;">
+                            <colgroup>
+                                <col style="width: 5%;">
+                                <col style="width: 15%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 60%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                            </colgroup>
+                            <thead style="width: 100%;">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Answer</th>
+                                    <th>Marks</th>
+                                    <th>AnswerId</th>
+                                    <th>Đáp án</th>
+                                    <th colspan="2">Thao tác</th>
+                                    <!-- <th>Id</th> -->
+
+                                </tr>
+                            </thead>
+                            <tbody style="width: 1px;">
+                                <tr ng-repeat="ch in answers ">
+                                    <td>{{ch.id}}</td>
+                                    <td>{{ch.Text}}</td>
+                                    <td>{{ch.Marks}}</td>
+                                    <td>{{ch.AnswerId}}</td>
+                                    <td>{{ch.Answers[0]}}
+                                        <br>{{ch.Answers[1]}}<br>{{ch.Answers[2]}}<br>{{ch.Answers[3]}}</td>
+                                    <td>
+                                        <button class="btn btn-primary" ng-click="edit($index)">Sửa</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" ng-click="delete($index,ch.id)">Xóa</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>

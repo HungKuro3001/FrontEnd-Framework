@@ -1,0 +1,45 @@
+
+    
+
+<div class="row">
+    <div class=" col-sm-12 col-md-6 mb-3" ng-repeat="cs in courses |limitTo : 6 : begin">
+        <div class="card">
+            <div class="row card-body">
+                <div class="col-5 col-sm-5  col-md-5">
+                    <img src="Image/{{cs.Img}}" class="card-img-top" alt="">
+                </div>
+                <div class="col-7 col-sm-7  col-md-7">
+                    <ul style="list-style: none;">
+                        <li>
+                            <h5> {{cs.Name}} </h5>
+                        </li>
+                        <li>
+                            <p>Test online</p>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary" href="#Quizz" ng-click=""
+                                ng-hide="!islambai">
+                                <h5>Làm bài</h5>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="row mt-2">
+        <div class="col-4 col-sm-4 col-md-4"></div>
+        <div class="col-8 col-sm-8  col-md-8">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="" ng-click="First()">First</a></li>
+
+                <li class="page-item"><a class="page-link" href="" ng-click="Pre()">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="" ng-click="Next()">Next</a></li>
+                <li class="page-item"><a class="page-link" href="" ng-click="Last()">Last</a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>

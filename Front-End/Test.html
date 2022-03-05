@@ -8,111 +8,47 @@
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>Title</title>
 </head>
-<style>
-    .loading {
-        background: rgba(0, 0, 0, .5);
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 999;
-    }
 
-    .spinner-center {
-        top: 50%;
-        left: 50%;
-        position: absolute;
-    }
-</style>
 
-<body ng-app="QLAC">
-    <div ng-controller="myFunc">
-        <!-- create div alert-->
-        <div class="alert {{isSuccess == true ? 'alert-success' : 'alert-danger'}}" ng-show="message.length != 0">
-            {{message}}
-        </div>
-        <form ng-submit="onSubmitForm($event)" action="" class="col-8 offset-2">
-            <div class="form-group mt-3">
-                <label for="">Họ tên:</label>
-                <input class="form-control" type="text" ng-model="account.name">
-            </div>
-            <div class="form-group mt-3">
-                <label for="">Mã SV</label>
-                <input class="form-control" type="text" ng-model="account.code">
-            </div>
-            <div class="form-group mt-3">
-                <label for="">Chuyên ngành</label>
-                <input class="form-control" ng-model="account.chuyen_nganh">
-            </div>
-            <div class="form-group mt-3">
-                <button class="btn btn-primary">Lưu</button>
-                <button type="reset" class="btn btn-default ml-3">Xóa form</button>
-            </div>
-        </form>
-        <div class="col-8 offset-2">
-            <table class="table mt-3">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Birthday</th>
-                        <th>Password</th>
-                        <th colspan="2">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="ac in accounts">
-                        <td>{{ ac.id }}</td>
-                        <td>{{ ac.name }}</td>
-                        <td>{{ ac.email }}</td>
-                        <td>{{ ac.birthday }}</td>
-                        <td>{{ ac.password }}</td>
-                        <td>
-                            <button class="btn btn-primary" ng-click="onUpdateStudent($index)" >Sửa</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_{{ac.id}}">Xóa</button>
-
-                            <div class="modal fade" id="modal_delete_{{ac.id}}" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Xác nhận xóa?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Đóng</button>
-                                            <button type="button" ng-click="onDeleteStudent(ac.id)" class="btn btn-danger">Xóa</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-start">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+<body >
+   <div>
+       <nav class="navbar navbar-expand-lg navbar-light bg-success">
+           <div class="container-fluid">
+               <a class="navbar-brand" href="#">Navbar</a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                       <li class="nav-item">
+                           <a class="nav-link active" aria-current="page" href="#">Home</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="#">Link</a>
+                       </li>
+                       <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               Dropdown
+                           </a>
+                           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                               <li><a class="dropdown-item" href="#">Action</a></li>
+                               <li><a class="dropdown-item" href="#">Another action</a></li>
+                               <li><hr class="dropdown-divider"></li>
+                               <li><a class="dropdown-item" href="#">Something else here</a></li>
+                           </ul>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                       </li>
+                   </ul>
+                   <form class="d-flex">
+                       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                       <button class="btn btn-outline-success" type="submit">Search</button>
+                   </form>
+               </div>
+           </div>
+       </nav>
+   </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>

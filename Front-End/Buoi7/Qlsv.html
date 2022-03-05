@@ -192,8 +192,10 @@
                         console.log("Xoá thành công");
                         $scope.message = "Xóa thành công";
                         $scope.isSuccess = true;
+                        console.log(index);
                         // remove student from array
                         $scope.students.splice(index, 1);
+                        $scope.students.push(res.data); 
                         $('#modal_delete_'+id).modal('hide');
                     })
                     .catch(function (err) {

@@ -1,0 +1,70 @@
+
+              <div class="container">
+
+                <div class="row"  >
+
+                    <div class="col-md-9">
+                        <div class="row text-center"><h2><span id="sophut"></span>:<span id="sogiay"></span></h2></div>
+                        <div class="card mt-1" ng-repeat="question in list_question | limitTo : 1 : batdau">
+                            <div class="card-header">
+                                <div class="row card-title">
+                                    <div class="col-7 col-sm-7 col-md-9">
+                                        <h5 class="pt-3"> {{monhoc.name}}</h5>
+                                    </div>
+                                    <div class="col-7 col-sm-7 col-md-3">
+                                        <p class="pt-3 fw-20px fw-bold">Điểm hiện tại : {{student.mark}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-star fw-bold">{{batdau + 1}}. {{question.Text}}?
+                                </p>
+                                <hr>
+                                <div class="form-check" ng-repeat="answer in question.Answers">
+                                    <input type="radio" name="chon" ng-model="ketqua[batdau].answer" id="{{answer.Id}}" ng-click="check()" class="" value="{{answer.Id}}">
+                                    <label class="form-check-lable" for="{{answer.Id}}">{{answer.Text}}</label>
+                                </div>
+                            </div>
+                            <div class="row card-footer">
+                                <div class="col-sm-5 col-md-6 mb-2 mt-2 ">
+                                <div class="row">
+                                   <div class="col-8">
+                                    <a class="btn btn-primary fw-bold" href="" ng-click="chamdiem()" ng-show="nopbai">Nộp bài</a> 
+                                    <a class="btn btn-primary fw-bold" href="" ng-click="Next()" ng-show="!nopbai">Câu sau</a> 
+                                    <span class="alert alert-{{thongbao}} col-6">{{message}}</span>
+                                   </div>
+                                 
+                                </div>
+                                    </div>
+                                
+                                <div class="col-sm-6 col-md-6">
+                                    <div class="row mt-2">
+                                        <div class="col-md-6"></div>
+                                       <div class="col-md-6">
+                                        <button class="btn btn-primary fw-bold" data-bs-target="#exampleModal" data-bs-toggle="modal">Kết thúc </button>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  Bạn có muốn kết thúc bài kiểm tra ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                                  <a  class="btn btn-primary" href="#KetQua" ng-click="xacnhan()">Xác nhận</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+  

@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>index</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .containe {
+        position: relative;
+        width: 796px;
+        max-width: 100%;
+        min-height: 480px;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22)
+    }
+
+    .sign-up,
+    .sign-in {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+    }
+
+    .sign-up {
+        width: 50%;
+        opacity: 0;
+        z-index: 1
+    }
+
+    .sign-in {
+        width: 50%;
+        z-index: 2;
+    }
+
+    form {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 50px;
+        height: 100%;
+        text-align: center;
+    }
+
+    h1 {
+        font-weight: bold;
+        margin: 0;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 100;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        margin: 15px 0 20px;
+    }
+
+    input {
+        background: #eee;
+        padding: 12px 15px;
+        margin: 8px 15px;
+        width: 100%;
+        border-radius: 5px;
+        border: none;
+        outline: none;
+    }
+
+    a {
+        color: #333;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 15px 0;
+    }
+
+    button {
+        color: #fff;
+        background: #ff4b2b;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 12px 55px;
+        margin: 20px;
+        border-radius: 20px;
+        border: 1px solid #ff4b2b;
+        outline: none;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: transform 80ms ease-in;
+        cursor: pointer;
+    }
+
+    button:active {
+        transform: scale(0.90);
+    }
+
+    #signIn,
+    #signUp {
+        background-color: transparent;
+        border: 2px solid #fff;
+    }
+
+    .containe.right-panel-active .sign-in {
+        transform: translateX(100%);
+    }
+
+    .containe.right-panel-active .sign-up {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+        animation: show 0.6s;
+    }
+
+    @keyframes show {
+
+        0%,
+        49.99% {
+            opacity: 0;
+            z-index: 1;
+        }
+
+        50%,
+        100% {
+            opacity: 1;
+            z-index: 5;
+        }
+    }
+
+    .overlay-containe {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+    }
+
+    .containe.right-panel-active .overlay-containe {
+        transform: translateX(-100%);
+    }
+
+    .overlay {
+        position: relative;
+        color: #fff;
+        background: #ff416c;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        background: linear-gradient(to right, #ff4b28, #e6b54e);
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .containe.right-panel-active .overlay {
+        transform: translateX(50%);
+    }
+
+    .overlay-left,
+    .overlay-right {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 40px;
+        text-align: center;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .overlay-left {
+        transform: translateX(-20%);
+    }
+
+    .overlay-right {
+        right: 0;
+        transform: translateX(0);
+    }
+
+    .containe.right-panel-active .overlay-left {
+        transform: translateX(0);
+    }
+
+    .containe.right-panel-active .overlay-right {
+        transform: translateX(20%);
+    }
+
+    .social-containe {
+        margin: 20px 0;
+    }
+
+    .social-containe a {
+        height: 40px;
+        width: 40px;
+        margin: 0 5px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+    }
+</style>
+
+<body ng-app="myIndex">
+    <div ng-controller="loginController">
+        <nav class="navbar navbar-expand-lg navbar-light bg-info" >
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#trangchu"><img src="Image/logo.e9737f2bfb0c.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#trangchu">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#gioithieu">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#lienhe">Liên hệ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#gopy">Góp ý</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#hoidap">Hỏi Đáp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#khoahoc">Danh mục khoá học</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex me-5">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark ms-3" href="#" id="navbarDropdown"
+                            
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tài khoản
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#Login"ng-hide="login==true">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="" data-bs-toggle="modal"
+                                            data-bs-target="#quenmatkhau" ng-hide="login==true">Quên mật khẩu</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#doimatkhau" ng-hide="login==false">Đổi mật khẩu</a></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#capnhat"
+                                            ng-hide="login==false">Cập nhật tài khoản</a></li>
+                                            <li><a class="dropdown-item" href="#Home" ng-click="logout()">Đăng xuất</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+    
+                </div>
+            </div>
+        </nav>
+        <!-- modal login-->
+        <!-- Modal -->
+        <div class="modal fade" id="Login" tabindex="-1" role="dialog"aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-lg modal-fullscreen-sm-down">
+                <div class="modal-content">
+                    <div class="containe" id="main">
+                        <div class="sign-up">
+                            <form action="#" name="form_signUp" ng-submit="onSubmitFormResgistration($event)">
+                                <h1>Create Account</h1>
+                                <div class="social-container">
+                                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                                <div class="form-group">
+                                    <input name="name" ng-model="name" id="new-user-name" type="text" placeholder="Name"
+                                        required>
+                                    <span class="form-message text-danger"
+                                        ng-hide="form_signUp.name.$valid || form_signUp.name.$untouched">Name invalid</span>
+                                </div>
+                                <div class="form-group">
+                                    <input name="email2" id="new-user-email" ng-model="email2" type="email"
+                                        placeholder="Email" required>
+                                    <span class="form-message text-danger"
+                                        ng-hide="form_signUp.email2.$valid || form_signUp.email2.$untouched">Email
+                                        invalid</span>
+                                </div>
+                                <div class="form-group">
+                                    <input name="pass2" id="new-user-password" ng-model="password" type="password"
+                                        placeholder="Password" required>
+                                    <span class="form-message text-danger"
+                                        ng-hide="form_signUp.pass2.$valid || form_signUp.pass2.$untouched">Password
+                                        invalid</span>
+                                </div>
+                                <div class="form-group">
+                                    <input name="pass3" id="confirm-user-password" ng-model="passwordConfirm"
+                                        type="password" placeholder="Confirm Password" required>
+                                    <span class="form-message text-danger"
+                                        ng-hide="form_signUp.pass3.$valid || form_signUp.pass3.$untouched">Confirm Password
+                                        invalid</span>
+                                </div>
+                                <div class="form-group">
+                                    <button class="form-submit">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="sign-in">
+                            <form ng-submit="onSubmitForm($event)" name="formSignIn">
+                                <h1>Sign in</h1>
+                                <div class="social-container">
+                                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+                                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                                <span>or use your account</span>
+                                <div class="form-group">
+                                    <input name="email1" ng-model="email1" id="user-name" type="email" placeholder="Email"
+                                        required>
+                                    <span ng-hide="formSignIn.email1.$valid || formSignIn.email1.$untouched"
+                                        class="form-message text-danger">Email invalid</span>
+                                </div>
+                                <div class="form-group">
+                                    <input name="pass1" ng-model="pass1" id="user-password" type="password"
+                                        placeholder="Password" required>
+                                    <span class="form-message text-danger"
+                                        ng-hide="formSignIn.pass1.$valid || formSignIn.pass1.$untouched">Password
+                                        invalid</span>
+                                </div>
+                                <div class="form-group">
+                                    <button class="form-submit">Sign In</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="overlay-containe">
+                            <div class="overlay">
+                                <div class="overlay-left">
+                                    <h1>Wellcome Back!</h1>
+                                    <p>To keep connected with us please login with your personal info</p>
+                                    <button id="signIn" type="button">Sign In</button>
+                                </div>
+                                <div class="overlay-right">
+                                    <h1>Hello, Friend</h1>
+                                    <p>Enter your personal details and start journey with us</p>
+                                    <button id="signUp" type="submit" class="btn">Sign Up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-view></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js"></script>
+    <script>
+        // javascript form login
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const main = document.getElementById('main');
+
+        signUpButton.addEventListener('click', () => {
+            main.classList.add("right-panel-active");
+        });
+        signInButton.addEventListener('click', () => {
+            main.classList.remove("right-panel-active");
+        });
+        //
+        const app = angular.module('myIndex', ['ngRoute']);
+        app.config(function ($routeProvider, $locationProvider) {
+            $locationProvider.hashPrefix('');
+            $routeProvider
+                .when('/trangchu', {
+                    templateUrl: 'Page/TrangChu.html'
+                })
+                .when('/gioithieu', {
+                    templateUrl: 'Page/GioiThieu.html'
+                })
+                .when('/gopy', {
+                    templateUrl: 'Page/GopY.html'
+                })
+                .when('/hoidap', {
+                    templateUrl: 'Page/HoiDap.html'
+                })
+                .when('/lienhe', {
+                    templateUrl: 'Page/LienHe.html'
+                })
+                .when('/khoahoc', {
+                    templateUrl: 'Page/KhoaHoc.html'
+                })
+                .when('/changeInfo', {
+                    templateUrl: 'Page/changeInformation.html',
+                    controller: 'changeInfomation'
+                })
+        });
+        app.controller('loginController', function ($scope, $http) {
+            $scope.accounts = [];
+            $scope.account = {
+                id: '',
+                name: '',
+                email: '',
+                role: '',
+                password: ''
+            };
+            $scope.login=false;
+            const api = 'https://620f09caec8b2ee283319ac1.mockapi.io/api/PH17124/Hung';
+            $http.get(api).then(function (res) {
+                    $scope.accounts = res.data;
+                    console.log(res);
+
+
+                })
+                .catch(function (err) {
+                    console.log(err);
+
+                });
+            $scope.onSubmitForm = function (e) {
+                e.preventDefault();
+                const email = $scope.email1;
+                const pass = $scope.pass1;
+
+                
+                const account = $scope.accounts.find(function (account) {
+
+                    return account.email === email && account.password === pass;
+                });
+                if (account) {
+                    console.log(account.id);
+                    if (account.role == false) {
+                        $scope.login=true;
+                        alert('Login success');
+                        $("#Login").modal('hide');
+                    } else {
+                        alert('Login success');
+                        window.location.href =
+                            '/front-End/Hunghpph17124_IT16301_WEB207_ASM/SinglePage/IndexAdmin.html';
+                    }
+                } else {
+                    alert('Login fail');
+                }
+            }
+            // create function registration with  api
+            $scope.onSubmitFormResgistration = function (e) { //
+                e.preventDefault();
+                const name = $scope.name;
+                const email = $scope.email2;
+                const password = $scope.password;
+                const passwordConfirm = $scope.passwordConfirm;
+                if (password !== passwordConfirm) {
+                    alert('Password not match');
+                    return;
+                }
+                const account = {
+                    id: '',
+                    name: name,
+                    email: email,
+                    birthday: birthday,
+                    password: password
+                };
+                $http.post(api, account).then(function (res) {
+                        $scope.accounts.push(account);
+                        alert('Register success');
+                        $location.path('/trangchu');
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                    });
+            }
+        });
+    </script>
+</body>
+
+</html>
